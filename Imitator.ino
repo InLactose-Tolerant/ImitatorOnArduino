@@ -12,6 +12,8 @@ const uint8_t buzzer = 5;
 const uint8_t latch_button = 6;
 const uint8_t red_led = 8;
 
+uint8_t maximum_time = 10; // If you want to test how many seconds your arduino can handle, be my guest. My one crashed at 12s
+
 //Defining variables
 boolean recorded = false;//will see if there is a recording to play or not
 LinkedList<unsigned uint8_t> pattern = LinkedList<uint8_t>(); //1 is LED, 2 is Buzzer, 3 is buzzer and led, 0 is nothing. Will store the button pressed
@@ -103,7 +105,7 @@ void loop() {
 }
 
 void recording(){
-  while (digitalRead(latch_button) == LOW && timer < 10){//While the latch button remains pressed and the total time is under 10s (Otherwise it would crash after 12 s)
+  while (digitalRead(latch_button) == LOW && timer < maximum_time){//While the latch button remains pressed and the total time is under 10s (Otherwise it would crash after 12 s)
     current = millis(); //Function to wait a millisecond and stored in current
     if (current - prev_current >= 1000){// If it has been 1000 seconds since last checked
       timer += 1; //increase lcd timer by 1
