@@ -141,21 +141,24 @@ void recording(){
       pattern.add(1);//add 1 to the pattern list and the relative time to the timing list
       timing.add(current);
       digitalWrite(green_led, HIGH);
+      digitalWrite(buzzer, LOW);
       delay(100);    
     }
     else if (digitalRead(buzzer_button) == LOW){//if user pressed buzzer button only
       pattern.add(2);//add 2 to the pattern list and the relative time to the timing list
       timing.add(current);
       digitalWrite(buzzer, HIGH);
+      digitalWrite(green_led, LOW);
       delay(100);
     }
     else{
       pattern.add(0);//if nothing is being pressed
       timing.add(current);// add 0 to the pattern list and relative time to the timing list
+      digitalWrite(buzzer, LOW);//reset buzzer and green led
+      digitalWrite(green_led, LOW);
       delay(100);
     }
-    digitalWrite(buzzer, LOW);//reset buzzer and green led
-    digitalWrite(green_led, LOW);
+
   }
   digitalWrite(red_led, LOW);//after user is done recording turn of LED
   lcd.clear();
